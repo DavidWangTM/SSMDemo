@@ -8,7 +8,7 @@
     <result column="type" property="type" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name, password, type
+    id, name, password, rid
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -79,4 +79,21 @@
       type = #{type,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+  <select id="findUserByUsername" parameterType="String" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from user where name=#{name}
+  </select>
+
+  <select id="findRoles" parameterType="String" resultType="String">
+    select r.roleName from user u,role r where u.rid=r.id and u.name=#{name}
+  </select>
+
+  <select id="findPermissions" parameterType="String" resultType="String">
+    select p.permissionName from user u,role r,t_permission p
+    where u.rid=r.id and p.roleId=r.id and u.name=#{name}
+  </select>
+
+
 </mapper>

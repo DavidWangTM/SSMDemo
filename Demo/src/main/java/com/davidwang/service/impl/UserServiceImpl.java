@@ -6,24 +6,33 @@ import com.davidwang.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 @Service("userService")
 public class UserServiceImpl implements UserService {
-//
-	private UserMapper userMapper;
-
-	public UserMapper getUserMapper() {
-		return userMapper;
-	}
 
 	@Autowired
-	public void setUserMapper(UserMapper userMapper) {
-		this.userMapper = userMapper;
-	}
+	private UserMapper userMapper;
 
-
-	@Override
 	public User getUserById(int id) {
 		return userMapper.selectByPrimaryKey(id);
 	}
+
+
+	public User findUserByUsername(String name) {
+		User user = userMapper.findUserByUsername(name);
+		return user;
+	}
+
+	public Set<String> findRoles(String name) {
+		return userMapper.findRoles(name);
+	}
+
+	public Set<String> findPermissions(String name) {
+		return userMapper.findPermissions(name);
+	}
+
+
+
 
 }
