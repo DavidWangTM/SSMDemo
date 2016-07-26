@@ -1,5 +1,7 @@
 package com.davidwang.controller;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +13,10 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 @RequestMapping("/test")
+@RequiresRoles("admin")
+@RequiresPermissions("test:*")
 public class TestController {
+
 
     @RequestMapping(value="")
     public String testIndex(HttpServletRequest request, Model model){
@@ -20,3 +25,4 @@ public class TestController {
     }
 
 }
+

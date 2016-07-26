@@ -12,6 +12,7 @@
     <title>后台</title>
 </head>
 <body>
+<shiro:authenticated>用户已经登录显示此内容</shiro:authenticated>
 <shiro:hasRole name="admin">
     这是admin角色登录：<shiro:principal></shiro:principal>
 </shiro:hasRole>

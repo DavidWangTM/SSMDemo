@@ -1,7 +1,11 @@
 package com.davidwang.controller;
 
+import com.davidwang.core.TokenManager;
 import com.davidwang.model.User;
 import com.davidwang.service.UserService;
+import com.davidwang.utils.LoggerUtils;
+import com.davidwang.utils.StringUtils;
+import com.davidwang.utils.VerifyCodeUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -33,12 +37,18 @@ public class AuthController {
 
 
     @RequestMapping("/loginAdmin")
-    public String loginAdmin(User user, Model model){
+    public String loginAdmin(String vcode,User user, Model model){
         Subject subject = SecurityUtils.getSubject() ;
         UsernamePasswordToken token = new UsernamePasswordToken(user.getName(),user.getPassword()) ;
         try {
             subject.login(token);
-            return "admin" ;
+            if(!VerifyCodeUtils.verifyCode(vcode)){
+                model.addAttribute("error","验证码错误") ;
+                return "../../login" ;
+            }else{
+                return "admin" ;
+            }
+
         }catch (Exception e){
             String name = user.getName();
             String password = user.getPassword();

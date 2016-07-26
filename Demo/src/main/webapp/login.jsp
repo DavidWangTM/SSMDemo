@@ -23,6 +23,12 @@
         <input type="password" name="password" class="password" placeholder="password" oncontextmenu="return false"
                onpaste="return false" />
     </div>
+
+    <div style="text-align: left; margin-left: 10px;" id="vcode">
+        <input type="text" name="vcode"   placeholder="Verification code" style="width: 110px; margin-left: -8px; margin-right: 8px;">
+        <img src="/open/getGifCode.shtml" />
+    </div>
+
     <button id="submit" type="submit">登录</button>
 </form>
 

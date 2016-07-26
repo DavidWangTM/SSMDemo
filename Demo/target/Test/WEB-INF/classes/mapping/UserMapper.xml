@@ -91,7 +91,7 @@
   </select>
 
   <select id="findPermissions" parameterType="String" resultType="String">
-    select p.permissionName from user u,role r,t_permission p
+    select p.permissionName from user u,role r,permission p
     where u.rid=r.id and p.roleId=r.id and u.name=#{name}
   </select>
 
